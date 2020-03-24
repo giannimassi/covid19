@@ -43,6 +43,11 @@ func run() error {
 		return fmt.Errorf("while getting google sheet client: %w", err)
 	}
 
+	err = writeToGoogleSheets(client, "1G2E9PF7ZJ0YGI8Fc0niZ7nHFM3i4IslQznTpQEbXkR0", "data", "data!A1", italy.casesByProvince("Toscana"))
+	if err != nil {
+		return fmt.Errorf("while writing to google sheet (id:%s): %v", "1G2E9PF7ZJ0YGI8Fc0niZ7nHFM3i4IslQznTpQEbXkR0", err)
+	}
+
 	id := os.Getenv("COVID_GOOGLESHEET")
 
 	for _, region := range italy.regionNames {
