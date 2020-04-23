@@ -52,6 +52,9 @@ func run() error {
 
 	for _, region := range italy.regionNames {
 		fmt.Println("Updating", region)
+		if region == "" {
+			continue
+		}
 		err = writeToGoogleSheets(client, id, region, region+"!A1", italy.casesByProvince(region))
 		if err != nil {
 			return fmt.Errorf("while writing to google sheet (id:%s): %v", id, err)
