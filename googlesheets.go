@@ -70,7 +70,7 @@ func writeToGoogleSheets(client *sheets.Service, id, sheet string, wrRange strin
 	for i := 0; i < 3; i++ {
 		_, err := client.Spreadsheets.Values.Update(id, wrRange, &vr).ValueInputOption("RAW").Do()
 		if err != nil {
-			fmt.Println("Attempting to create sheet " + sheet)
+			fmt.Printf("Attempting to create sheet %s (err: %v)\n", sheet, err)
 			if err := createSheet(); err != nil && i == 2 {
 				return fmt.Errorf("Unable to retrieve data from sheet. %w", err)
 			}
