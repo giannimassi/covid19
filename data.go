@@ -149,9 +149,13 @@ func recordFromStrings(fields []string) (record, error) {
 	if len(fields) < 9 {
 		return record{}, errors.New("malformed")
 	}
+
 	data, err := time.Parse("2006-01-02 15:04:05", fields[0])
 	if err != nil {
-		return record{}, err
+		data, err = time.Parse("2006-01-02T15:04:05", fields[0])
+		if err != nil {
+			return record{}, err
+		}
 	}
 
 	regionID, err := strconv.Atoi(fields[2])
